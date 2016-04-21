@@ -5,7 +5,7 @@ require('should');
 const bot = require('./bot');
 
 describe('base bot', () => {
-  describe('reactToMessage', () => {
+  describe('respondToMessage', () => {
     const testData = {
       message: {
         text: 'Hello!'
@@ -15,16 +15,16 @@ describe('base bot', () => {
       }
     };
     it('should return a Promise', done => {
-      bot.reactToMessage(testData)
-      .then(() => done());
+      bot.respondToMessage(testData)
+        .then(() => done());
     });
     it('should return an object with messageText and senderId', done => {
-      bot.reactToMessage(testData)
-      .then(actual => {
-        actual.messageText.should.exist;
-        actual.senderId.should.exist;
-        done();
-      });
+      bot.respondToMessage(testData)
+        .then(actual => {
+          actual.messageText.should.exist;
+          actual.senderId.should.exist;
+          done();
+        });
     });
   });
 });
