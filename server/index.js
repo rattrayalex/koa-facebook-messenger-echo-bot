@@ -1,5 +1,7 @@
-'use strict';
-const Koa = require('koa');
+import Koa from 'koa';
+import * as controllers from './controllers';
+import routes from './routes';
+
 const server = new Koa();
 
 if (!process.env.PAGE_TOKEN) {
@@ -9,8 +11,5 @@ if (!process.env.VERIFY_TOKEN) {
   throw new Error('Missing environment variable VERIFY_TOKEN');
 }
 
-const controllers = require('./controllers');
-const routes = require('./routes')(controllers);
-
-server.use(routes);
+server.use(routes(controllers));
 server.listen(process.env.PORT || 3000);

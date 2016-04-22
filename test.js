@@ -1,18 +1,17 @@
 /* global it, describe */
-'use strict';
-require('should');
-
-const bot = require('./bot');
+/* eslint-disable no-unused-expressions */
+import 'should';
+import bot from './bot';
 
 describe('base bot', () => {
   describe('respondToMessage', () => {
     const testData = {
       message: {
-        text: 'Hello!'
+        text: 'Hello!',
       },
       sender: {
-        id: 1
-      }
+        id: 1,
+      },
     };
     it('should return a Promise', done => {
       bot.respondToMessage(testData)

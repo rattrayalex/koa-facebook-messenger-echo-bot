@@ -1,10 +1,11 @@
-'use strict';
-const router = require('koa-router')();
-const bodyparser = require('koa-bodyparser');
+import Router from 'koa-router';
+import bodyparser from 'koa-bodyparser';
 
-module.exports = function(controllers) {
+const router = new Router();
+
+export default function (controllers) {
   router.use(bodyparser());
   router.get('/', controllers.verify);
-  router.post('/', controllers.react);
+  router.post('/', controllers.respond);
   return router.routes();
-};
+}
