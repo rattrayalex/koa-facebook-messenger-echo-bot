@@ -7,7 +7,7 @@ function echo(event) {
   };
 }
 
-export function respondToMessage(event) {
+export async function respondToMessage(event) {
   d({ event });
   if (!(event.message && event.message.text)) {
     return Promise.reject('no message text');

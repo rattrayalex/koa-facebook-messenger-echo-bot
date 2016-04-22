@@ -1,6 +1,7 @@
 import request from 'request';
+import { d } from '../util';
 
-function requestp(options) {
+async function requestp(options) {
   return new Promise((resolve, reject) => {
     request(options, (err, response) => {
       if (!err) {
@@ -11,12 +12,13 @@ function requestp(options) {
   });
 }
 
-export function sendMessage({ senderId, messageText }) {
+export async function sendMessage({ senderId, messageText }) {
+  d({ senderId, messageText });
   if (!(senderId && messageText)) {
     throw new Error('senderId and messageText required');
   }
 
-  return requestp({
+  return await requestp({
     url: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: process.env.PAGE_TOKEN },
     method: 'POST',
@@ -29,7 +31,8 @@ export function sendMessage({ senderId, messageText }) {
 
 export function getMessages(entries) {
   const messages = [];
-  entries.forEeach(entry => entry.messaging.forEach(event => {
+  entries.forEach(entry => entry.messaging.forEach(event => {
+    d({ event });
     if (event.message && event.message.text) {
       messages.push(event);
     }
